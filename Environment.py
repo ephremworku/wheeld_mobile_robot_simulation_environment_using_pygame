@@ -17,6 +17,7 @@ def uncertainty_add(distance, angle, sigma):
     angle = max(angle, 0)
     return [distance, angle]
 
+
 class Env:
     def __init__(self):
 
@@ -98,11 +99,17 @@ class Env:
     def collisionDetectorCircles(self):
         pygame.draw.circle(self.screen, self.blue, self.sprite_pos, 60, 1)
         for iter in self.rectangleFourCoordinates:
-            # print(iter)
+            print(self.sprite_pos)
             if sqrt((iter[0] - self.sprite_pos[0]) ** 2 + (iter[1] - self.sprite_pos[1]) ** 2) < 60:
-                print(iter)
+                # print(iter)
 
                 self.sprite_pos = [self.screenWidth / 2, self.screenHeight]
+
+            if ((self.sprite_pos[0] > self.screenWidth) or (self.sprite_pos[0] < 0)) or (
+                    (self.sprite_pos[1] > self.screenHeight + 20) or
+                    self.sprite_pos[1] < 0):
+                self.sprite_pos = [self.screenWidth / 2, self.screenHeight]
+
 
     # car motion including the tilting and heading motion
     def carMotion(self):
@@ -172,7 +179,7 @@ class Env:
             m = 0
             for j in circlePos:
                 m += 1
-                if  abs(iter[0] - j[0]) <= 5 and abs(iter[1] - j[1]) <= 5:
+                if abs(iter[0] - j[0]) <= 5 and abs(iter[1] - j[1]) <= 5:
                     # m = circlePos.index(j)
                     if 0 <= m <= 9:
                         quadrant = 4
@@ -188,7 +195,6 @@ class Env:
                         print("in quadrant 1 point: ", m, "collied")
 
                     detectPoint.append(m)
-
 
             episoideDetectPoint.append(detectPoint)
         return detectPoint
@@ -213,11 +219,6 @@ class Env:
         # print(iter)
         # if sqrt((iter[0] - self.sprite_pos[0]) ** 2 + (iter[1] - self.sprite_pos[1]) ** 2) < 60:
         #     print(iter)
-
-
-
-
-
 
     def distance(self, obstaclePosition):
         px = (obstaclePosition[0] - self.position[0]) ** 2
@@ -245,7 +246,7 @@ class Env:
                     color = self.screen.get_at((x, y))
                     if (color[0], color[1], color[2]) == self.gray:
                         distance = self.distance((x, y))
-                        angles.append(int(angle*180/math.pi))
+                        angles.append(int(angle * 180 / math.pi))
                         # print(distance)
                         output = uncertainty_add(distance, angle, self.sigma)
                         new_distances.append(output[0])
@@ -262,7 +263,6 @@ class Env:
                     scen.append(new_distances)
                 else:
                     scen.append(0)
-
 
         # print('distances: ', scen)
         # print('index: ', index)
