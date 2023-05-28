@@ -1,3 +1,4 @@
+
 import pygame
 from pygame.locals import *
 from sys import exit
@@ -10,17 +11,9 @@ pygame.init()
 screenWidth = 1000
 screenHeight = 620
 screen = pygame.display.set_mode((screenWidth, screenHeight), 0, 32)
-sprite = pygame.image.load(sprite_image_filename).convert_alpha()
-clock = pygame.time.Clock()
-spriteRect = sprite.get_rect()
-obsDim = 50
-maph = 480
-mapw = 640
-gray = (70, 70, 70)
+
 white = (255, 255, 255)
-blue = (0, 255, 0)
-red = (255, 0, 0)
-black = (0, 0, 0)
+
 
 environment = Env()
 

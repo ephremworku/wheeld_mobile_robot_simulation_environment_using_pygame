@@ -70,8 +70,6 @@ class Env:
 
     # draw obstacles
     def obstacles(self):
-        # upperCornerx = int(random.uniform(0, mapw - obsDim))
-        # upperCornery = int(random.uniform(0, maph - obsDim))
         upperCornerXY = ((50, 50), (30, 150), (550, 175), (100, 250), (250, 50), (250, 575), (350, 165),
                          (540, 150), (450, 50), (750, 650), (750, 350), (850, 550), (650, 50), (850, 666),
                          (503, 456))
@@ -133,8 +131,6 @@ class Env:
 
         w, h = rotated_sprite.get_size()
         wid, hei = w, h
-        # print(w, h)
-        # print(int(self.sprite_pos[0]), int(self.sprite_pos[1]))
         sprite_draw_pos = (self.sprite_pos[0] - w / 2, self.sprite_pos[1] - h / 2)
         self.screen.blit(rotated_sprite, sprite_draw_pos)
         time_passed = self.clock.tick()
@@ -153,10 +149,6 @@ class Env:
         circlePos = []
         m = 0
         pygame.draw.circle(self.screen, self.blue, self.sprite_pos, 100, 1)
-        # for iter in self.rectangleFourCoordinates:
-        # print(iter)
-        # if sqrt((iter[0] - self.sprite_pos[0]) ** 2 + (iter[1] - self.sprite_pos[1]) ** 2) < 100:
-        # print(sqrt((iter[0] - self.sprite_pos[0]) ** 2 + (iter[1] - self.sprite_pos[1]) ** 2))
 
         for i in range(36):
             px = 100 * cos(i * (10 * pi / 180))
@@ -215,11 +207,6 @@ class Env:
             colliedPoints = self.obstacleDistanceMeasuringCircle()
             print(colliedPoints)
 
-        # print(episoideDetectPoint)
-        # print(iter)
-        # if sqrt((iter[0] - self.sprite_pos[0]) ** 2 + (iter[1] - self.sprite_pos[1]) ** 2) < 60:
-        #     print(iter)
-
     def distance(self, obstaclePosition):
         px = (obstaclePosition[0] - self.position[0]) ** 2
         py = (obstaclePosition[1] - self.position[1]) ** 2
@@ -263,10 +250,6 @@ class Env:
                     scen.append(new_distances)
                 else:
                     scen.append(0)
-
-        # print('distances: ', scen)
-        # print('index: ', index)
-        # print('angles: ', angles)
         if len(data) > 0:
             return scen, angles, index
         else:
